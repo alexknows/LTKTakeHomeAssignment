@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,18 @@
 		35B5FC5B27A1FA4500570514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35B5FC5927A1FA4500570514 /* Main.storyboard */; };
 		35B5FC5D27A1FA4B00570514 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35B5FC5C27A1FA4B00570514 /* Assets.xcassets */; };
 		35B5FC6027A1FA4B00570514 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35B5FC5E27A1FA4B00570514 /* LaunchScreen.storyboard */; };
+		35B5FC7427A20D8400570514 /* ProductImageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35B5FC7327A20D8400570514 /* ProductImageViewCell.xib */; };
+		35B5FC7627A20E6800570514 /* ProductImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC7527A20E6800570514 /* ProductImageViewCell.swift */; };
+		35B5FC7827A212EB00570514 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC7727A212EB00570514 /* Product.swift */; };
+		35B5FC7D27A2183600570514 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 35B5FC7C27A2183600570514 /* Kingfisher */; };
+		35B5FC8127A2188E00570514 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC8027A2188E00570514 /* UIImageViewExtension.swift */; };
+		35B5FC8327A21FC500570514 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC8227A21FC500570514 /* UITableViewExtension.swift */; };
+		35B5FC8527A2207500570514 /* NibLoadableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC8427A2207500570514 /* NibLoadableViewExtension.swift */; };
+		35B5FC8727A220B200570514 /* ReusableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC8627A220B200570514 /* ReusableViewExtension.swift */; };
+		35B5FC8A27A220E700570514 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC8927A220E700570514 /* NibLoadableView.swift */; };
+		35B5FC8C27A2210200570514 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC8B27A2210200570514 /* ReusableView.swift */; };
+		35B5FC9027A231E100570514 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC8F27A231E100570514 /* ProductViewController.swift */; };
+		35B5FC9227A23C7100570514 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC9127A23C7000570514 /* UIViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +36,17 @@
 		35B5FC5C27A1FA4B00570514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35B5FC5F27A1FA4B00570514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35B5FC6127A1FA4B00570514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		35B5FC7327A20D8400570514 /* ProductImageViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductImageViewCell.xib; sourceTree = SOURCE_ROOT; };
+		35B5FC7527A20E6800570514 /* ProductImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageViewCell.swift; sourceTree = "<group>"; };
+		35B5FC7727A212EB00570514 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		35B5FC8027A2188E00570514 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		35B5FC8227A21FC500570514 /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
+		35B5FC8427A2207500570514 /* NibLoadableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadableViewExtension.swift; sourceTree = "<group>"; };
+		35B5FC8627A220B200570514 /* ReusableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableViewExtension.swift; sourceTree = "<group>"; };
+		35B5FC8927A220E700570514 /* NibLoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
+		35B5FC8B27A2210200570514 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		35B5FC8F27A231E100570514 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		35B5FC9127A23C7000570514 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35B5FC7D27A2183600570514 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +80,146 @@
 		35B5FC5227A1FA4500570514 /* LTK */ = {
 			isa = PBXGroup;
 			children = (
-				35B5FC5327A1FA4500570514 /* AppDelegate.swift */,
+				35B5FC6927A1FAF300570514 /* App */,
+				35B5FC6827A1FAE900570514 /* Common */,
+				35B5FC6727A1FADD00570514 /* Modules */,
+				35B5FC6A27A1FAFD00570514 /* Resources */,
 				35B5FC5527A1FA4500570514 /* SceneDelegate.swift */,
-				35B5FC5727A1FA4500570514 /* ViewController.swift */,
-				35B5FC5927A1FA4500570514 /* Main.storyboard */,
 				35B5FC5C27A1FA4B00570514 /* Assets.xcassets */,
 				35B5FC5E27A1FA4B00570514 /* LaunchScreen.storyboard */,
 				35B5FC6127A1FA4B00570514 /* Info.plist */,
 			);
 			path = LTK;
+			sourceTree = "<group>";
+		};
+		35B5FC6727A1FADD00570514 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC6B27A1FB1B00570514 /* HomeFeed */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		35B5FC6827A1FAE900570514 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC8827A220C800570514 /* Protocols */,
+				35B5FC7E27A2184900570514 /* Extensions */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		35B5FC6927A1FAF300570514 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC5327A1FA4500570514 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		35B5FC6A27A1FAFD00570514 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		35B5FC6B27A1FB1B00570514 /* HomeFeed */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC7127A1FB4800570514 /* Views */,
+				35B5FC7027A1FB4100570514 /* Controllers */,
+				35B5FC6F27A1FB3A00570514 /* Facade */,
+				35B5FC6E27A1FB3300570514 /* Services */,
+				35B5FC6D27A1FB2B00570514 /* Models */,
+				35B5FC6C27A1FB2500570514 /* Endpoints */,
+			);
+			path = HomeFeed;
+			sourceTree = "<group>";
+		};
+		35B5FC6C27A1FB2500570514 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		35B5FC6D27A1FB2B00570514 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC7727A212EB00570514 /* Product.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		35B5FC6E27A1FB3300570514 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		35B5FC6F27A1FB3A00570514 /* Facade */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Facade;
+			sourceTree = "<group>";
+		};
+		35B5FC7027A1FB4100570514 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC5727A1FA4500570514 /* ViewController.swift */,
+				35B5FC8F27A231E100570514 /* ProductViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		35B5FC7127A1FB4800570514 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC7227A20D2400570514 /* CustomCells */,
+				35B5FC5927A1FA4500570514 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		35B5FC7227A20D2400570514 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC7327A20D8400570514 /* ProductImageViewCell.xib */,
+				35B5FC7527A20E6800570514 /* ProductImageViewCell.swift */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		35B5FC7E27A2184900570514 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC7F27A2185600570514 /* UIKit */,
+				35B5FC8427A2207500570514 /* NibLoadableViewExtension.swift */,
+				35B5FC8627A220B200570514 /* ReusableViewExtension.swift */,
+				35B5FC9127A23C7000570514 /* UIViewControllerExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		35B5FC7F27A2185600570514 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC8027A2188E00570514 /* UIImageViewExtension.swift */,
+				35B5FC8227A21FC500570514 /* UITableViewExtension.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		35B5FC8827A220C800570514 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC8927A220E700570514 /* NibLoadableView.swift */,
+				35B5FC8B27A2210200570514 /* ReusableView.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +238,9 @@
 			dependencies = (
 			);
 			name = LTK;
+			packageProductDependencies = (
+				35B5FC7C27A2183600570514 /* Kingfisher */,
+			);
 			productName = LTK;
 			productReference = 35B5FC5027A1FA4500570514 /* LTK.app */;
 			productType = "com.apple.product-type.application";
@@ -110,6 +268,9 @@
 				Base,
 			);
 			mainGroup = 35B5FC4727A1FA4500570514;
+			packageReferences = (
+				35B5FC7B27A2183500570514 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 35B5FC5127A1FA4500570514 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -125,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35B5FC6027A1FA4B00570514 /* LaunchScreen.storyboard in Resources */,
+				35B5FC7427A20D8400570514 /* ProductImageViewCell.xib in Resources */,
 				35B5FC5D27A1FA4B00570514 /* Assets.xcassets in Resources */,
 				35B5FC5B27A1FA4500570514 /* Main.storyboard in Resources */,
 			);
@@ -137,9 +299,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35B5FC8527A2207500570514 /* NibLoadableViewExtension.swift in Sources */,
+				35B5FC7627A20E6800570514 /* ProductImageViewCell.swift in Sources */,
 				35B5FC5827A1FA4500570514 /* ViewController.swift in Sources */,
+				35B5FC8127A2188E00570514 /* UIImageViewExtension.swift in Sources */,
+				35B5FC8C27A2210200570514 /* ReusableView.swift in Sources */,
+				35B5FC7827A212EB00570514 /* Product.swift in Sources */,
+				35B5FC9027A231E100570514 /* ProductViewController.swift in Sources */,
 				35B5FC5427A1FA4500570514 /* AppDelegate.swift in Sources */,
+				35B5FC8A27A220E700570514 /* NibLoadableView.swift in Sources */,
+				35B5FC9227A23C7100570514 /* UIViewControllerExtension.swift in Sources */,
 				35B5FC5627A1FA4500570514 /* SceneDelegate.swift in Sources */,
+				35B5FC8327A21FC500570514 /* UITableViewExtension.swift in Sources */,
+				35B5FC8727A220B200570514 /* ReusableViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +513,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		35B5FC7B27A2183500570514 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		35B5FC7C27A2183600570514 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35B5FC7B27A2183500570514 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 35B5FC4827A1FA4500570514 /* Project object */;
 }
