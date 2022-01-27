@@ -8,18 +8,20 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Ltk View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LTK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LtkViewController" customModule="LTK" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I4D-pU-snf">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I4D-pU-snf">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="818" id="O8B-kl-3Am"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="UKv-8F-lWU"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Rpb-vN-B76"/>
@@ -28,6 +30,12 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="I4D-pU-snf" secondAttribute="bottom" id="2yB-Gf-VrW"/>
+                            <constraint firstItem="I4D-pU-snf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OYG-cw-SVO"/>
+                            <constraint firstItem="I4D-pU-snf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="n8k-3d-QET"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="I4D-pU-snf" secondAttribute="trailing" id="uAY-NK-94V"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="I4D-pU-snf" id="Y46-tb-hkc"/>
@@ -46,17 +54,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qqj-dm-go7">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="306"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qqj-dm-go7">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="425"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="425" id="nN7-Zr-vv5"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SlV-j7-7YJ">
+                                <rect key="frame" x="325" y="433" width="69" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="15B-pB-f99"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="15B-pB-f99" firstAttribute="trailing" secondItem="qqj-dm-go7" secondAttribute="trailing" id="JZK-ut-sOh"/>
+                            <constraint firstItem="qqj-dm-go7" firstAttribute="leading" secondItem="15B-pB-f99" secondAttribute="leading" id="cZG-E7-hlg"/>
+                            <constraint firstItem="qqj-dm-go7" firstAttribute="top" secondItem="15B-pB-f99" secondAttribute="top" id="wQU-HU-gcI"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="amg-RF-zBM"/>
                     <connections>
                         <outlet property="mainImageView" destination="qqj-dm-go7" id="saE-1k-cur"/>
+                        <outlet property="profileImageView" destination="SlV-j7-7YJ" id="UVk-7f-fE9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vgl-ME-Lnw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

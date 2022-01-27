@@ -1,13 +1,14 @@
 //
-//  ViewController.swift
+//  LtkViewController.swift
 //  LTK
 //
 //  Created by Alex Cruz on 1/26/22.
 //
 
 import UIKit
+import PromiseKit
 
-class ViewController: UIViewController {
+class LtkViewController: UIViewController {
     // =============
     // MARK: - Enums
     // =============
@@ -30,12 +31,17 @@ class ViewController: UIViewController {
     // ==================
     // MARK: - Properties
     // ==================
-    var products = [Product]()
+    var ltksWrapper: LtksWrapper?
     
     // MARK: Public
-
-
-
+    
+    
+    // MARK: Private
+    private var ltks: [Ltk] = [] {
+        didSet {
+            tableView?.reloadData()
+        }
+    }
 
 }
 
@@ -45,19 +51,22 @@ class ViewController: UIViewController {
 // =======================
 
 // MARK: Life Cycle
-extension ViewController {
+extension LtkViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        let product = Product()
-        product.image = URL(string: "url")
-        products.append(product)
-        print(products)
         // Do any additional setup after loading the view.
+        
+        showLoading()
+            .then(getLtkList)
+            .done(setLtkList)
+            .ensure(hideLoading)
+            .catch(presentError)
+    
     }
 }
 
 // MARK: Navigation
-extension ViewController {
+extension LtkViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
@@ -66,7 +75,8 @@ extension ViewController {
         switch identifier {
         case .showProduct:
             let destinationVC = segue.destination as? ProductViewController
-            destinationVC?.product =  sender as? Product
+            destinationVC?.ltk =  sender as? Ltk
+            destinationVC?.ltksWrapper = ltksWrapper
         }
     }
 }
@@ -75,9 +85,37 @@ extension ViewController {
 // ===============
 // MARK: - Methods
 // ===============
-private extension ViewController {
+private extension LtkViewController {
     func registerCollectionViewCell() {
         tableView.register(ProductImageViewCell.self)
+    }
+    
+    func setLtkList(with data: LtksWrapper) {
+        ltksWrapper = data
+        ltks = data.ltks
+    }
+}
+
+// ==========================
+// MARK: - Facade Interaction
+// ==========================
+private extension LtkViewController {
+    func getLtkList() -> Promise<LtksWrapper> {
+        LtkFacade.shared.getLtkList(with: "true", limit: 5)
+    }
+}
+
+// ==========================
+// MARK: - View State Manager
+// ==========================
+private extension LtkViewController {
+    func showLoading() -> Guarantee<Void> {
+        tableView.showLoading()
+        return Guarantee.value(())
+    }
+    
+    func hideLoading() {
+        tableView.hideLoading()
     }
 }
 
@@ -86,26 +124,26 @@ private extension ViewController {
 // ==================
 
 // MARK: Data Source
-extension ViewController: UITableViewDataSource {
+extension LtkViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return products.count
+        return ltks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ProductImageViewCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.setDataCell(with: products[indexPath.row].image)
+        cell.setDataCell(with: ltks[indexPath.row].heroImage)
         
         return cell
     }
 }
 
 // MARK: Delegate
-extension ViewController: UITableViewDelegate {
+extension LtkViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: Segue.showProduct, sender: products[indexPath.row])
+       performSegue(withIdentifier: Segue.showProduct, sender: ltks[indexPath.row])
     }
 }

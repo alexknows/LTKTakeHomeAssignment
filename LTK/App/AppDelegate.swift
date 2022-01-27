@@ -10,10 +10,15 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // MARK: Configuring Default JSONEncoder
+        JSONEncoder.default.dateEncodingStrategy = .iso8601
+        JSONEncoder.default.keyEncodingStrategy = .convertToSnakeCase
+        
+        // MARK: Configuring Default JSONDecoder
+        JSONDecoder.default.dateDecodingStrategy = .iso8601
+        JSONDecoder.default.keyDecodingStrategy = .convertFromSnakeCase
         return true
     }
 

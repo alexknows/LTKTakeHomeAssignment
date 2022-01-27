@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		35B5FC5427A1FA4500570514 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC5327A1FA4500570514 /* AppDelegate.swift */; };
 		35B5FC5627A1FA4500570514 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC5527A1FA4500570514 /* SceneDelegate.swift */; };
-		35B5FC5827A1FA4500570514 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC5727A1FA4500570514 /* ViewController.swift */; };
+		35B5FC5827A1FA4500570514 /* LtkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC5727A1FA4500570514 /* LtkViewController.swift */; };
 		35B5FC5B27A1FA4500570514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35B5FC5927A1FA4500570514 /* Main.storyboard */; };
 		35B5FC5D27A1FA4B00570514 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35B5FC5C27A1FA4B00570514 /* Assets.xcassets */; };
 		35B5FC6027A1FA4B00570514 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35B5FC5E27A1FA4B00570514 /* LaunchScreen.storyboard */; };
 		35B5FC7427A20D8400570514 /* ProductImageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35B5FC7327A20D8400570514 /* ProductImageViewCell.xib */; };
 		35B5FC7627A20E6800570514 /* ProductImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC7527A20E6800570514 /* ProductImageViewCell.swift */; };
-		35B5FC7827A212EB00570514 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC7727A212EB00570514 /* Product.swift */; };
+		35B5FC7827A212EB00570514 /* Ltk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC7727A212EB00570514 /* Ltk.swift */; };
 		35B5FC7D27A2183600570514 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 35B5FC7C27A2183600570514 /* Kingfisher */; };
 		35B5FC8127A2188E00570514 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC8027A2188E00570514 /* UIImageViewExtension.swift */; };
 		35B5FC8327A21FC500570514 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC8227A21FC500570514 /* UITableViewExtension.swift */; };
@@ -25,20 +25,37 @@
 		35B5FC8C27A2210200570514 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC8B27A2210200570514 /* ReusableView.swift */; };
 		35B5FC9027A231E100570514 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC8F27A231E100570514 /* ProductViewController.swift */; };
 		35B5FC9227A23C7100570514 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC9127A23C7000570514 /* UIViewControllerExtension.swift */; };
+		35B5FC9627A24B6600570514 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC9527A24B6500570514 /* Page.swift */; };
+		35B5FC9827A24BAC00570514 /* ParentJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC9727A24BAC00570514 /* ParentJson.swift */; };
+		35B5FC9B27A2503000570514 /* DecodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC9A27A2503000570514 /* DecodableExtension.swift */; };
+		35B5FC9E27A251F400570514 /* LtkEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FC9D27A251F400570514 /* LtkEndpoint.swift */; };
+		35B5FCA127A2543700570514 /* InfoDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FCA027A2543700570514 /* InfoDictionary.swift */; };
+		35B5FCA427A2562E00570514 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 35B5FCA327A2562E00570514 /* PromiseKit */; };
+		35B5FCA627A2568C00570514 /* LtkFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FCA527A2568C00570514 /* LtkFacade.swift */; };
+		35B5FCA827A2569D00570514 /* LtkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FCA727A2569D00570514 /* LtkService.swift */; };
+		35B5FCAB27A258C300570514 /* LtkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FCAA27A258C300570514 /* LtkProvider.swift */; };
+		35B5FCAE27A25B7200570514 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 35B5FCAD27A25B7200570514 /* Moya */; };
+		35B5FCB127A25DA100570514 /* NetworkErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FCB027A25DA100570514 /* NetworkErrors.swift */; };
+		35B5FCB327A25E4F00570514 /* JSONDecoderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FCB227A25E4F00570514 /* JSONDecoderExtension.swift */; };
+		35B5FCB627A2688000570514 /* JSONEncoderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FCB527A2688000570514 /* JSONEncoderExtension.swift */; };
+		35B5FCB827A268C100570514 /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FCB727A268C100570514 /* DictionaryExtension.swift */; };
+		35B5FCBA27A26DAE00570514 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FCB927A26DAE00570514 /* Image.swift */; };
+		35B5FCBD27A27C8700570514 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FCBC27A27C8700570514 /* ActivityIndicator.swift */; };
+		35B5FCBF27A27CAF00570514 /* ViewLoadingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B5FCBE27A27CAF00570514 /* ViewLoadingManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		35B5FC5027A1FA4500570514 /* LTK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LTK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35B5FC5327A1FA4500570514 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35B5FC5527A1FA4500570514 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		35B5FC5727A1FA4500570514 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		35B5FC5727A1FA4500570514 /* LtkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LtkViewController.swift; sourceTree = "<group>"; };
 		35B5FC5A27A1FA4500570514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		35B5FC5C27A1FA4B00570514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35B5FC5F27A1FA4B00570514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35B5FC6127A1FA4B00570514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35B5FC7327A20D8400570514 /* ProductImageViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductImageViewCell.xib; sourceTree = SOURCE_ROOT; };
 		35B5FC7527A20E6800570514 /* ProductImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageViewCell.swift; sourceTree = "<group>"; };
-		35B5FC7727A212EB00570514 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		35B5FC7727A212EB00570514 /* Ltk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ltk.swift; sourceTree = "<group>"; };
 		35B5FC8027A2188E00570514 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		35B5FC8227A21FC500570514 /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		35B5FC8427A2207500570514 /* NibLoadableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadableViewExtension.swift; sourceTree = "<group>"; };
@@ -47,6 +64,21 @@
 		35B5FC8B27A2210200570514 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		35B5FC8F27A231E100570514 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		35B5FC9127A23C7000570514 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		35B5FC9527A24B6500570514 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		35B5FC9727A24BAC00570514 /* ParentJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentJson.swift; sourceTree = "<group>"; };
+		35B5FC9A27A2503000570514 /* DecodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableExtension.swift; sourceTree = "<group>"; };
+		35B5FC9D27A251F400570514 /* LtkEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LtkEndpoint.swift; sourceTree = "<group>"; };
+		35B5FCA027A2543700570514 /* InfoDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDictionary.swift; sourceTree = "<group>"; };
+		35B5FCA527A2568C00570514 /* LtkFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LtkFacade.swift; sourceTree = "<group>"; };
+		35B5FCA727A2569D00570514 /* LtkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LtkService.swift; path = LTK/Modules/HomeFeed/Facade/LtkService.swift; sourceTree = SOURCE_ROOT; };
+		35B5FCAA27A258C300570514 /* LtkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LtkProvider.swift; sourceTree = "<group>"; };
+		35B5FCB027A25DA100570514 /* NetworkErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrors.swift; sourceTree = "<group>"; };
+		35B5FCB227A25E4F00570514 /* JSONDecoderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderExtension.swift; sourceTree = "<group>"; };
+		35B5FCB527A2688000570514 /* JSONEncoderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONEncoderExtension.swift; sourceTree = "<group>"; };
+		35B5FCB727A268C100570514 /* DictionaryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtension.swift; sourceTree = "<group>"; };
+		35B5FCB927A26DAE00570514 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		35B5FCBC27A27C8700570514 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		35B5FCBE27A27CAF00570514 /* ViewLoadingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLoadingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +87,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				35B5FC7D27A2183600570514 /* Kingfisher in Frameworks */,
+				35B5FCA427A2562E00570514 /* PromiseKit in Frameworks */,
+				35B5FCAE27A25B7200570514 /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +137,11 @@
 		35B5FC6827A1FAE900570514 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				35B5FCBB27A27C7600570514 /* Modules */,
+				35B5FCAF27A25D8900570514 /* Errors */,
+				35B5FCA927A258AA00570514 /* CommonClasses */,
+				35B5FC9F27A2542100570514 /* Helpers */,
+				35B5FC9327A24B3A00570514 /* Models */,
 				35B5FC8827A220C800570514 /* Protocols */,
 				35B5FC7E27A2184900570514 /* Extensions */,
 			);
@@ -140,6 +179,7 @@
 		35B5FC6C27A1FB2500570514 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
+				35B5FC9D27A251F400570514 /* LtkEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -147,7 +187,7 @@
 		35B5FC6D27A1FB2B00570514 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				35B5FC7727A212EB00570514 /* Product.swift */,
+				35B5FCB427A267BB00570514 /* Decodable */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -155,6 +195,7 @@
 		35B5FC6E27A1FB3300570514 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				35B5FCA727A2569D00570514 /* LtkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -162,6 +203,7 @@
 		35B5FC6F27A1FB3A00570514 /* Facade */ = {
 			isa = PBXGroup;
 			children = (
+				35B5FCA527A2568C00570514 /* LtkFacade.swift */,
 			);
 			path = Facade;
 			sourceTree = "<group>";
@@ -169,7 +211,7 @@
 		35B5FC7027A1FB4100570514 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				35B5FC5727A1FA4500570514 /* ViewController.swift */,
+				35B5FC5727A1FA4500570514 /* LtkViewController.swift */,
 				35B5FC8F27A231E100570514 /* ProductViewController.swift */,
 			);
 			path = Controllers;
@@ -196,6 +238,7 @@
 		35B5FC7E27A2184900570514 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				35B5FC9927A2501800570514 /* Foundation */,
 				35B5FC7F27A2185600570514 /* UIKit */,
 				35B5FC8427A2207500570514 /* NibLoadableViewExtension.swift */,
 				35B5FC8627A220B200570514 /* ReusableViewExtension.swift */,
@@ -222,6 +265,76 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		35B5FC9327A24B3A00570514 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC9427A24B4500570514 /* Decodable */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		35B5FC9427A24B4500570514 /* Decodable */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC9527A24B6500570514 /* Page.swift */,
+				35B5FC9727A24BAC00570514 /* ParentJson.swift */,
+			);
+			path = Decodable;
+			sourceTree = "<group>";
+		};
+		35B5FC9927A2501800570514 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC9A27A2503000570514 /* DecodableExtension.swift */,
+				35B5FCB227A25E4F00570514 /* JSONDecoderExtension.swift */,
+				35B5FCB527A2688000570514 /* JSONEncoderExtension.swift */,
+				35B5FCB727A268C100570514 /* DictionaryExtension.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		35B5FC9F27A2542100570514 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FCA027A2543700570514 /* InfoDictionary.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		35B5FCA927A258AA00570514 /* CommonClasses */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FCAA27A258C300570514 /* LtkProvider.swift */,
+			);
+			path = CommonClasses;
+			sourceTree = "<group>";
+		};
+		35B5FCAF27A25D8900570514 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FCB027A25DA100570514 /* NetworkErrors.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		35B5FCB427A267BB00570514 /* Decodable */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FC7727A212EB00570514 /* Ltk.swift */,
+				35B5FCB927A26DAE00570514 /* Image.swift */,
+			);
+			path = Decodable;
+			sourceTree = "<group>";
+		};
+		35B5FCBB27A27C7600570514 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				35B5FCBC27A27C8700570514 /* ActivityIndicator.swift */,
+				35B5FCBE27A27CAF00570514 /* ViewLoadingManager.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -240,6 +353,8 @@
 			name = LTK;
 			packageProductDependencies = (
 				35B5FC7C27A2183600570514 /* Kingfisher */,
+				35B5FCA327A2562E00570514 /* PromiseKit */,
+				35B5FCAD27A25B7200570514 /* Moya */,
 			);
 			productName = LTK;
 			productReference = 35B5FC5027A1FA4500570514 /* LTK.app */;
@@ -270,6 +385,8 @@
 			mainGroup = 35B5FC4727A1FA4500570514;
 			packageReferences = (
 				35B5FC7B27A2183500570514 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				35B5FCA227A2562E00570514 /* XCRemoteSwiftPackageReference "PromiseKit" */,
+				35B5FCAC27A25B7200570514 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 35B5FC5127A1FA4500570514 /* Products */;
 			projectDirPath = "";
@@ -300,17 +417,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				35B5FC8527A2207500570514 /* NibLoadableViewExtension.swift in Sources */,
+				35B5FCA127A2543700570514 /* InfoDictionary.swift in Sources */,
 				35B5FC7627A20E6800570514 /* ProductImageViewCell.swift in Sources */,
-				35B5FC5827A1FA4500570514 /* ViewController.swift in Sources */,
+				35B5FC5827A1FA4500570514 /* LtkViewController.swift in Sources */,
+				35B5FCB627A2688000570514 /* JSONEncoderExtension.swift in Sources */,
+				35B5FC9B27A2503000570514 /* DecodableExtension.swift in Sources */,
+				35B5FC9827A24BAC00570514 /* ParentJson.swift in Sources */,
+				35B5FCAB27A258C300570514 /* LtkProvider.swift in Sources */,
+				35B5FCB327A25E4F00570514 /* JSONDecoderExtension.swift in Sources */,
 				35B5FC8127A2188E00570514 /* UIImageViewExtension.swift in Sources */,
+				35B5FCA827A2569D00570514 /* LtkService.swift in Sources */,
+				35B5FCBF27A27CAF00570514 /* ViewLoadingManager.swift in Sources */,
+				35B5FC9627A24B6600570514 /* Page.swift in Sources */,
+				35B5FCB827A268C100570514 /* DictionaryExtension.swift in Sources */,
 				35B5FC8C27A2210200570514 /* ReusableView.swift in Sources */,
-				35B5FC7827A212EB00570514 /* Product.swift in Sources */,
+				35B5FC7827A212EB00570514 /* Ltk.swift in Sources */,
+				35B5FCA627A2568C00570514 /* LtkFacade.swift in Sources */,
+				35B5FCBD27A27C8700570514 /* ActivityIndicator.swift in Sources */,
 				35B5FC9027A231E100570514 /* ProductViewController.swift in Sources */,
 				35B5FC5427A1FA4500570514 /* AppDelegate.swift in Sources */,
 				35B5FC8A27A220E700570514 /* NibLoadableView.swift in Sources */,
+				35B5FC9E27A251F400570514 /* LtkEndpoint.swift in Sources */,
 				35B5FC9227A23C7100570514 /* UIViewControllerExtension.swift in Sources */,
 				35B5FC5627A1FA4500570514 /* SceneDelegate.swift in Sources */,
+				35B5FCB127A25DA100570514 /* NetworkErrors.swift in Sources */,
 				35B5FC8327A21FC500570514 /* UITableViewExtension.swift in Sources */,
+				35B5FCBA27A26DAE00570514 /* Image.swift in Sources */,
 				35B5FC8727A220B200570514 /* ReusableViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,6 +655,22 @@
 				minimumVersion = 7.1.2;
 			};
 		};
+		35B5FCA227A2562E00570514 /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mxcl/PromiseKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.16.2;
+			};
+		};
+		35B5FCAC27A25B7200570514 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -530,6 +678,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 35B5FC7B27A2183500570514 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		35B5FCA327A2562E00570514 /* PromiseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35B5FCA227A2562E00570514 /* XCRemoteSwiftPackageReference "PromiseKit" */;
+			productName = PromiseKit;
+		};
+		35B5FCAD27A25B7200570514 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35B5FCAC27A25B7200570514 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
