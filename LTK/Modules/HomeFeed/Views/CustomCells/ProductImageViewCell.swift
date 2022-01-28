@@ -14,8 +14,7 @@ class ProductImageViewCell: UITableViewCell {
     
     // MARK: Image View
     @IBOutlet private weak var productImageView: UIImageView!
-    
-    // MARK: Label
+
 }
 
 // =====================

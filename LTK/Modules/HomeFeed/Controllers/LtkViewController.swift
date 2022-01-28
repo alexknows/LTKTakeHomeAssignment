@@ -54,6 +54,7 @@ final class LtkViewController: UIViewController {
             tableView?.reloadData()
         }
     }
+    private var isDataLoading = false
     
 }
 
@@ -72,7 +73,7 @@ extension LtkViewController {
         showLoading()
             .then { [weak self] _ -> Promise<LtksWrapper> in
                 guard let self = self else { return Promise(error: GlobalError.selfIsNil) }
-                
+
                 return self.getLtkList(with: "true", limit: 10)
             }
             .done(setCurrentPage)
@@ -174,17 +175,38 @@ extension LtkViewController: UITableViewDelegate {
         
         performSegue(withIdentifier: Segue.showProduct, sender: detaiObject)
     }
+}
+
+// ===================
+// MARK: - Scroll View
+// ===================
+extension LtkViewController {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        print("scrollViewWillBeginDragging")
+        isDataLoading = false
+    }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 >= datasource.count {
-            guard let lastId = currentPage?.meta.lastId,
-                  let seed = currentPage?.meta.seed else { return }
-            
-            getLtkList(with: "true", limit: 10, lastId: lastId, seed: seed)
-                .done(setCurrentPage)
-                .ensure(hideLoading)
-                .catch(presentError)
+    
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print("scrollViewDidEndDecelerating")
+    }
+    
+    // MARK: Pagination
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("scrollViewDidEndDragging")
+        if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height)
+        {
+            if !isDataLoading{
+                isDataLoading = true
+                guard let lastId = currentPage?.meta.lastId,
+                      let seed = currentPage?.meta.seed else { return }
+
+                getLtkList(with: "true", limit: 10, lastId: lastId, seed: seed)
+                    .done(setCurrentPage)
+                    .ensure(hideLoading)
+                    .catch(presentError)
+            }
         }
     }
 }
-
