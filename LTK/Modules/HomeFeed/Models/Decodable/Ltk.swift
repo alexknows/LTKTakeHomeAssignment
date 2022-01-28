@@ -22,7 +22,10 @@ struct Ltk: Decodable {
 }
 
 struct Meta: Decodable {
-    let nextUrl: URL?
+    let lastId: String?
+    let limit: Int?
+    let seed: String?
+    let nextUrl: String?
 }
 
 struct Product: Decodable {

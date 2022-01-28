@@ -37,8 +37,23 @@ final class LtkService {
 extension LtkService {
     func getLtkList(with featured: String, limit: Int) -> Promise<LtksWrapper> {
         return Promise<Data> { seal in
-            // revisit
             provider.request(.ltks(featured: featured, limit: limit)) { result in
+                switch result {
+                case let .success(moyaResponse):
+                    let data = moyaResponse.data
+                    seal.fulfill(data)
+                case let .failure(error):
+                    seal.reject(error)
+                }
+            }
+        }
+        .then(LtksWrapper.jsonDecode)
+        .recover(NetworkErrors.handle)
+    }
+    
+    func getNextLtkList(with featured: String, lastId: String, limit: Int, seed: String) -> Promise<LtksWrapper> {
+        return Promise<Data> { seal in
+            provider.request(.ltksNextPage(featured: featured, lastId: lastId, limit: limit, seed: seed)) { result in
                 switch result {
                 case let .success(moyaResponse):
                     let data = moyaResponse.data

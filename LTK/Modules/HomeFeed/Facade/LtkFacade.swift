@@ -30,4 +30,9 @@ extension LtkFacade {
         ltkService.getLtkList(with: featured, limit: limit)
             .map { $0.self }
     }
+    
+    func getNextLtkList(with featured: String, lastId: String, limit: Int, seed: String) -> Promise<LtksWrapper> {
+        ltkService.getNextLtkList(with: featured, lastId: lastId, limit: limit, seed: seed)
+            .map { $0.self }
+    }
 }

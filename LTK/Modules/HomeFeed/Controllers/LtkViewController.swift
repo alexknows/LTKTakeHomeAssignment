@@ -37,7 +37,7 @@ class LtkViewController: UIViewController {
     
     
     // MARK: Private
-    private var ltks: [Ltk] = [] {
+    private var ltksArray: [Ltk] = [] {
         didSet {
             tableView?.reloadData()
         }
@@ -92,8 +92,14 @@ private extension LtkViewController {
     
     func setLtkList(with data: LtksWrapper) {
         ltksWrapper = data
-        ltks = data.ltks
+        ltksArray = data.ltks
     }
+    
+    func setNextLtkList(with data: LtksWrapper) {
+        ltksWrapper = data
+        ltksArray.append(contentsOf: data.ltks)
+    }
+    
 }
 
 // ==========================
@@ -102,6 +108,10 @@ private extension LtkViewController {
 private extension LtkViewController {
     func getLtkList() -> Promise<LtksWrapper> {
         LtkFacade.shared.getLtkList(with: "true", limit: 5)
+    }
+    
+    func getNextLtkList() -> Promise<LtksWrapper> {
+        LtkFacade.shared.getNextLtkList(with: "true", lastId: ltksWrapper?.meta.lastId ?? "", limit: ltksWrapper?.meta.limit ?? 0, seed: ltksWrapper?.meta.seed ?? "")
     }
 }
 
@@ -126,12 +136,12 @@ private extension LtkViewController {
 // MARK: Data Source
 extension LtkViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ltks.count
+        return ltksArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ProductImageViewCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.setDataCell(with: ltks[indexPath.row].heroImage)
+        cell.setDataCell(with: ltksArray[indexPath.row].heroImage)
         
         return cell
     }
@@ -144,6 +154,14 @@ extension LtkViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       performSegue(withIdentifier: Segue.showProduct, sender: ltks[indexPath.row])
+       performSegue(withIdentifier: Segue.showProduct, sender: ltksArray[indexPath.row])
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 >= ltksArray.count {
+            getNextLtkList()
+                .done(setNextLtkList)
+                .catch(presentError)
+        }
     }
 }
