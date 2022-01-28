@@ -9,8 +9,7 @@ import Foundation
 import Moya
 
 enum LtkEndpoint {
-    case ltks(featured: String, limit: Int)
-    case ltksNextPage(featured: String, lastId: String, limit: Int, seed: String)
+    case ltks(featured: String, limit: Int, lastId: String?, seed: String?)
 }
 
 extension LtkEndpoint: TargetType {
@@ -24,9 +23,7 @@ extension LtkEndpoint: TargetType {
     
     var path: String {
         switch self {
-        case .ltks(_, _):
-            return "/ltks/"
-        case .ltksNextPage(_,_,_, _):
+        case .ltks:
             return "/ltks/"
         }
             
@@ -34,7 +31,7 @@ extension LtkEndpoint: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .ltks, .ltksNextPage:
+        case .ltks:
             return .get
         }
     }
@@ -45,11 +42,13 @@ extension LtkEndpoint: TargetType {
     
     var task: Task {
         switch self {
-        case .ltks(let featured, let limit):
-            let parameters: [String: Any] = ["featured": featured, "limit": limit]
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        case .ltksNextPage(featured: let featured, lastId: let lastId, limit: let limit, seed: let seed):
-            let parameters: [String: Any] = ["featured": featured, "last_id": lastId, "limit": limit, "seed": seed]
+        case .ltks(let featured, let limit, let lastId, let seed):
+            var parameters: [String: Any] = ["featured": featured,
+                                             "limit": limit]
+            if let lastId = lastId, let seed = seed {
+                parameters["last_id"] = lastId
+                parameters["seed"] = seed
+            }
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         }
     }

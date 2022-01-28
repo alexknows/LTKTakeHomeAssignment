@@ -16,6 +16,7 @@ struct LtksWrapper: Decodable {
 }
 
 struct Ltk: Decodable {
+    let id: String?
     let heroImage: URL?
     let profileId: String?
     let productIds: [String]?
@@ -30,7 +31,7 @@ struct Meta: Decodable {
 
 struct Product: Decodable {
     let id: String?
-    let hyperlink: String?
+    let hyperlink: URL?
     let imageUrl: URL?
 }
 

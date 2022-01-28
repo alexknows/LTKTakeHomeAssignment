@@ -26,13 +26,7 @@ final class LtkFacade {
 // MARK: - Service Requests
 // ========================
 extension LtkFacade {
-    func getLtkList(with featured: String, limit: Int) -> Promise<LtksWrapper> {
-        ltkService.getLtkList(with: featured, limit: limit)
-            .map { $0.self }
-    }
-    
-    func getNextLtkList(with featured: String, lastId: String, limit: Int, seed: String) -> Promise<LtksWrapper> {
-        ltkService.getNextLtkList(with: featured, lastId: lastId, limit: limit, seed: seed)
-            .map { $0.self }
+    func getLtkList(with featured: String, limit: Int, lastId: String?, seed: String?) -> Promise<LtksWrapper> {
+        ltkService.getLtkList(with: featured, limit: limit, lastId: lastId, seed: seed)
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import PromiseKit
 
-class LtkViewController: UIViewController {
+final class LtkViewController: UIViewController {
     // =============
     // MARK: - Enums
     // =============
@@ -31,18 +31,30 @@ class LtkViewController: UIViewController {
     // ==================
     // MARK: - Properties
     // ==================
-    var ltksWrapper: LtksWrapper?
     
     // MARK: Public
     
-    
     // MARK: Private
-    private var ltksArray: [Ltk] = [] {
+    private var currentPage: LtksWrapper? {
+        didSet {
+            if oldValue != nil {
+                guard let currentPage = currentPage else { return }
+                datasource.append(contentsOf: currentPage.ltks)
+            } else {
+                guard let currentPage = currentPage else {
+                    datasource = []
+                    return
+                }
+                datasource = currentPage.ltks
+            }
+        }
+    }
+    private var datasource: [Ltk] = [] {
         didSet {
             tableView?.reloadData()
         }
     }
-
+    
 }
 
 
@@ -55,13 +67,17 @@ extension LtkViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setupView()
         
         showLoading()
-            .then(getLtkList)
-            .done(setLtkList)
+            .then { [weak self] _ -> Promise<LtksWrapper> in
+                guard let self = self else { return Promise(error: GlobalError.selfIsNil) }
+                
+                return self.getLtkList(with: "true", limit: 10)
+            }
+            .done(setCurrentPage)
             .ensure(hideLoading)
             .catch(presentError)
-    
     }
 }
 
@@ -71,12 +87,11 @@ extension LtkViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         guard let identifier = Segue(rawValue: segue.identifier ?? "") else { return }
-        //
+        
         switch identifier {
         case .showProduct:
             let destinationVC = segue.destination as? ProductViewController
-            destinationVC?.ltk =  sender as? Ltk
-            destinationVC?.ltksWrapper = ltksWrapper
+            destinationVC?.detailModel =  sender as? DetailModel
         }
     }
 }
@@ -90,14 +105,12 @@ private extension LtkViewController {
         tableView.register(ProductImageViewCell.self)
     }
     
-    func setLtkList(with data: LtksWrapper) {
-        ltksWrapper = data
-        ltksArray = data.ltks
+    func setupView() {
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    func setNextLtkList(with data: LtksWrapper) {
-        ltksWrapper = data
-        ltksArray.append(contentsOf: data.ltks)
+    func setCurrentPage(with data: LtksWrapper) {
+        currentPage = data
     }
     
 }
@@ -106,12 +119,8 @@ private extension LtkViewController {
 // MARK: - Facade Interaction
 // ==========================
 private extension LtkViewController {
-    func getLtkList() -> Promise<LtksWrapper> {
-        LtkFacade.shared.getLtkList(with: "true", limit: 5)
-    }
-    
-    func getNextLtkList() -> Promise<LtksWrapper> {
-        LtkFacade.shared.getNextLtkList(with: "true", lastId: ltksWrapper?.meta.lastId ?? "", limit: ltksWrapper?.meta.limit ?? 0, seed: ltksWrapper?.meta.seed ?? "")
+    func getLtkList(with featured: String, limit: Int, lastId: String? = nil, seed: String? = nil) -> Promise<LtksWrapper> {
+        LtkFacade.shared.getLtkList(with: featured, limit: limit, lastId: lastId, seed: seed)
     }
 }
 
@@ -136,12 +145,12 @@ private extension LtkViewController {
 // MARK: Data Source
 extension LtkViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ltksArray.count
+        datasource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ProductImageViewCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.setDataCell(with: ltksArray[indexPath.row].heroImage)
+        cell.setDataCell(with: datasource[indexPath.row].heroImage)
         
         return cell
     }
@@ -150,18 +159,32 @@ extension LtkViewController: UITableViewDataSource {
 // MARK: Delegate
 extension LtkViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        view.frame.width
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       performSegue(withIdentifier: Segue.showProduct, sender: ltksArray[indexPath.row])
+        var productImages: [Product?] = []
+        datasource[indexPath.row].productIds?.forEach { productID in
+            productImages.append(currentPage?.products.first { $0.id == productID } )
+        }
+        
+        let detaiObject = DetailModel(heroImage: datasource[indexPath.row].heroImage,
+                                      avatarUrl: currentPage?.profiles.first { $0.id == datasource[indexPath.row].profileId }?.avatarUrl,
+                                      products: productImages.compactMap { $0 } )
+        
+        performSegue(withIdentifier: Segue.showProduct, sender: detaiObject)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 >= ltksArray.count {
-            getNextLtkList()
-                .done(setNextLtkList)
+        if indexPath.row + 1 >= datasource.count {
+            guard let lastId = currentPage?.meta.lastId,
+                  let seed = currentPage?.meta.seed else { return }
+            
+            getLtkList(with: "true", limit: 10, lastId: lastId, seed: seed)
+                .done(setCurrentPage)
+                .ensure(hideLoading)
                 .catch(presentError)
         }
     }
 }
+
