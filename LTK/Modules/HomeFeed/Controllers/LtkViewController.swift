@@ -8,23 +8,19 @@
 import UIKit
 import PromiseKit
 
-final class LtkViewController: UIViewController {
+final class LtkViewController: UIViewController {    
     // =============
     // MARK: - Enums
     // =============
     private enum Segue: String {
         case showProduct
     }
-    
-    // ===============
-    // MARK: - Outlets
-    // ===============
-    
+
     // MARK: Table View
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
-            // Register collection view cell
-            registerCollectionViewCell()
+            // Register table view cell
+            registerTableViewCell()
         }
     }
     
@@ -32,7 +28,8 @@ final class LtkViewController: UIViewController {
     // MARK: - Properties
     // ==================
     
-    // MARK: Public
+    // MARK: Injection
+    var facade: LtkFacadeProtocol?
     
     // MARK: Private
     private var currentPage: LtksWrapper? {
@@ -41,10 +38,7 @@ final class LtkViewController: UIViewController {
                 guard let currentPage = currentPage else { return }
                 datasource.append(contentsOf: currentPage.ltks)
             } else {
-                guard let currentPage = currentPage else {
-                    datasource = []
-                    return
-                }
+                guard let currentPage = currentPage else { return }
                 datasource = currentPage.ltks
             }
         }
@@ -54,8 +48,6 @@ final class LtkViewController: UIViewController {
             tableView?.reloadData()
         }
     }
-    private var isDataLoading = false
-    
 }
 
 
@@ -69,12 +61,10 @@ extension LtkViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupView()
-        
         showLoading()
             .then { [weak self] _ -> Promise<LtksWrapper> in
-                guard let self = self else { return Promise(error: GlobalError.selfIsNil) }
-
-                return self.getLtkList(with: "true", limit: 10)
+                guard let self = self else { return Promise(error: GlobalError.selfIsNil)}
+                return self.getCurrentPage(with: "true", limit: 10)
             }
             .done(setCurrentPage)
             .ensure(hideLoading)
@@ -88,7 +78,6 @@ extension LtkViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         guard let identifier = Segue(rawValue: segue.identifier ?? "") else { return }
-        
         switch identifier {
         case .showProduct:
             let destinationVC = segue.destination as? ProductViewController
@@ -97,12 +86,11 @@ extension LtkViewController {
     }
 }
 
-
 // ===============
 // MARK: - Methods
 // ===============
 private extension LtkViewController {
-    func registerCollectionViewCell() {
+    func registerTableViewCell() {
         tableView.register(ProductImageViewCell.self)
     }
     
@@ -120,8 +108,9 @@ private extension LtkViewController {
 // MARK: - Facade Interaction
 // ==========================
 private extension LtkViewController {
-    func getLtkList(with featured: String, limit: Int, lastId: String? = nil, seed: String? = nil) -> Promise<LtksWrapper> {
-        LtkFacade.shared.getLtkList(with: featured, limit: limit, lastId: lastId, seed: seed)
+    func getCurrentPage(with featured: String, limit: Int, lastId: String? = nil, seed: String? = nil) -> Promise<LtksWrapper> {
+        guard let facade = facade else { fatalError("Missing dependencies") }
+        return facade.getCurrentPage(with: featured, limit: limit, lastId: lastId, seed: seed)
     }
 }
 
@@ -131,7 +120,7 @@ private extension LtkViewController {
 private extension LtkViewController {
     func showLoading() -> Guarantee<Void> {
         tableView.showLoading()
-        return Guarantee.value(())
+        return .value(())
     }
     
     func hideLoading() {
@@ -152,7 +141,6 @@ extension LtkViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ProductImageViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.setDataCell(with: datasource[indexPath.row].heroImage)
-        
         return cell
     }
 }
@@ -164,49 +152,62 @@ extension LtkViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var productImages: [Product?] = []
+        var products: [Product?] = []
         datasource[indexPath.row].productIds?.forEach { productID in
-            productImages.append(currentPage?.products.first { $0.id == productID } )
+            products.append(currentPage?.products.first { $0.id == productID } )
         }
         
-        let detaiObject = DetailModel(heroImage: datasource[indexPath.row].heroImage,
+        let detailObject = DetailModel(heroImage: datasource[indexPath.row].heroImage,
                                       avatarUrl: currentPage?.profiles.first { $0.id == datasource[indexPath.row].profileId }?.avatarUrl,
-                                      products: productImages.compactMap { $0 } )
+                                      products: products.compactMap { $0 } )
         
-        performSegue(withIdentifier: Segue.showProduct, sender: detaiObject)
+        performSegue(withIdentifier: Segue.showProduct, sender: detailObject)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 >= datasource.count {
+            guard let lastId = currentPage?.meta.lastId,
+                  let seed = currentPage?.meta.seed else { return }
+            
+            getCurrentPage(with: "true", limit: 10, lastId: lastId, seed: seed)
+                .done(setCurrentPage)
+                .ensure(hideLoading)
+                .catch(presentError)
+        }
     }
 }
 
 // ===================
 // MARK: - Scroll View
 // ===================
-extension LtkViewController {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        print("scrollViewWillBeginDragging")
-        isDataLoading = false
-    }
-    
-    
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print("scrollViewDidEndDecelerating")
-    }
-    
-    // MARK: Pagination
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("scrollViewDidEndDragging")
-        if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height)
-        {
-            if !isDataLoading{
-                isDataLoading = true
-                guard let lastId = currentPage?.meta.lastId,
-                      let seed = currentPage?.meta.seed else { return }
+//extension LtkViewController {
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        print("scrollViewWillBeginDragging")
+//        isDataLoading = false
+//    }
+//
+//
+//
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        print("scrollViewDidEndDecelerating")
+//    }
+//
+//    // MARK: Pagination
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//        print("scrollViewDidEndDragging")
+//        if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height)
+//        {
+//            if !isDataLoading{
+//                isDataLoading = true
+//                guard let lastId = currentPage?.meta.lastId,
+//                      let seed = currentPage?.meta.seed else { return }
+//
+//                getCurrentPage(with: "true", limit: 10, lastId: lastId, seed: seed)
+//                    .done(setCurrentPage)
+//                    .ensure(hideLoading)
+//                    .catch(presentError)
+//            }
+//        }
+//    }
+//}
 
-                getLtkList(with: "true", limit: 10, lastId: lastId, seed: seed)
-                    .done(setCurrentPage)
-                    .ensure(hideLoading)
-                    .catch(presentError)
-            }
-        }
-    }
-}

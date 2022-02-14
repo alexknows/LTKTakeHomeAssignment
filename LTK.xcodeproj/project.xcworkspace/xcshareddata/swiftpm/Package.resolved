@@ -54,6 +54,33 @@
           "revision": "b4307ba0b6425c0ba4178e138799946c3da594f8",
           "version": "6.5.0"
         }
+      },
+      {
+        "package": "Swinject",
+        "repositoryURL": "https://github.com/Swinject/Swinject",
+        "state": {
+          "branch": "master",
+          "revision": "f10b6e9ebff440f985c43008f7c2d097639fcb81",
+          "version": null
+        }
+      },
+      {
+        "package": "SwinjectAutoregistration",
+        "repositoryURL": "https://github.com/Swinject/SwinjectAutoregistration",
+        "state": {
+          "branch": "master",
+          "revision": "41de6785fb640cafbb38b8b9e9047c80eebfaaa7",
+          "version": null
+        }
+      },
+      {
+        "package": "SwinjectStoryboard",
+        "repositoryURL": "https://github.com/Swinject/SwinjectStoryboard",
+        "state": {
+          "branch": "master",
+          "revision": "47df16142f8f9ce54a54bd61d04ae5c93d9de8eb",
+          "version": null
+        }
       }
     ]
   },

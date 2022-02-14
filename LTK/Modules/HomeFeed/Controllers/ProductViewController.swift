@@ -73,6 +73,10 @@ private extension ProductViewController {
     }
     
     func setupView() {
+        // What are you doing here?
+        /**
+         
+        */
         products = detailModel?.products ?? []
         mainImageView.setImage(with: detailModel?.heroImage)
         profileImageView.setImage(with: detailModel?.avatarUrl)

@@ -48,20 +48,6 @@ final class LtkProvider<Target: TargetType>: MoyaProvider<Target> {
                 if case .underlying(_, let moyaResponse) = moyaError,
                     let response = moyaResponse, response.statusCode == 401 {
                     //
-//                    Auth.auth().currentUser?.getIDTokenResult(forcingRefresh: true) { [weak self] (tokenResult, _) in
-//                        guard let `self` = self else {
-//                            completion(result)
-//                            return
-//                        }
-//                        //
-//                        if let tokenResult = tokenResult {
-//                            DataStore.shared[.firebaseToken] = tokenResult.token
-//                            //
-//                            _ = self.requestNormal(target, callbackQueue: callbackQueue, progress: progress, completion: completion)
-//                        } else {
-//                            completion(result)
-//                        }
-//                    }
                 } else {
                     completion(result)
                 }

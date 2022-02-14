@@ -9,13 +9,11 @@ import Foundation
 import PromiseKit
 import Moya
 
-final class LtkService {
-    // ============================
-    // MARK: - Singleton Definition
-    // ============================
-    static let shared = LtkService()
-    private init() {}
-    
+protocol LtkServiceProtocol {
+    func getCurrentPage(with featured: String, limit: Int, lastId: String?, seed: String?) -> Promise<LtksWrapper>
+}
+
+final class LtkService: LtkServiceProtocol {
     // ==================
     // MARK: - Properties
     // ==================
@@ -35,7 +33,7 @@ final class LtkService {
 // MARK: - Methods
 // ===============
 extension LtkService {
-    func getLtkList(with featured: String, limit: Int, lastId: String?, seed: String?) -> Promise<LtksWrapper> {
+    func getCurrentPage(with featured: String, limit: Int, lastId: String?, seed: String?) -> Promise<LtksWrapper> {
         return Promise<Data> { seal in
             provider.request(.ltks(featured: featured, limit: limit, lastId: lastId, seed: seed)) { result in
                 switch result {
