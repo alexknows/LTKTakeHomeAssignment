@@ -51,6 +51,8 @@
 		35E5353D27B9D67B00AEBB34 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 35E5353C27B9D67B00AEBB34 /* Swinject */; };
 		35E5354027B9D69000AEBB34 /* SwinjectAutoregistration in Frameworks */ = {isa = PBXBuildFile; productRef = 35E5353F27B9D69000AEBB34 /* SwinjectAutoregistration */; };
 		35E5354327B9D6A200AEBB34 /* SwinjectStoryboard in Frameworks */ = {isa = PBXBuildFile; productRef = 35E5354227B9D6A200AEBB34 /* SwinjectStoryboard */; };
+		35E5355427BA124A00AEBB34 /* LtkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5355327BA124A00AEBB34 /* LtkViewModel.swift */; };
+		35E5355827BC57F500AEBB34 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5355727BC57F500AEBB34 /* Box.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +96,8 @@
 		35D8F61B27A427F400776F1E /* GlobalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalError.swift; sourceTree = "<group>"; };
 		35D8F61D27A45B7700776F1E /* ProductImageViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductImageViewCell.xib; sourceTree = "<group>"; };
 		35E5353127B9CD7100AEBB34 /* SwinjectStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwinjectStoryboard+Extension.swift"; sourceTree = "<group>"; };
+		35E5355327BA124A00AEBB34 /* LtkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LtkViewModel.swift; sourceTree = "<group>"; };
+		35E5355727BC57F500AEBB34 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,13 +117,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		35172AA227AB2A4400FE2028 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
 		35B5FC4727A1FA4500570514 = {
 			isa = PBXGroup;
 			children = (
@@ -154,7 +151,6 @@
 		35B5FC6727A1FADD00570514 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				35172AA227AB2A4400FE2028 /* Profile */,
 				35B5FC6B27A1FB1B00570514 /* HomeFeed */,
 			);
 			path = Modules;
@@ -163,6 +159,7 @@
 		35B5FC6827A1FAE900570514 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				35E5355627BC57D700AEBB34 /* Utilities */,
 				35E5353027B9CD4800AEBB34 /* Containers */,
 				35B5FCBB27A27C7600570514 /* Modules */,
 				35B5FCAF27A25D8900570514 /* Errors */,
@@ -193,6 +190,7 @@
 		35B5FC6B27A1FB1B00570514 /* HomeFeed */ = {
 			isa = PBXGroup;
 			children = (
+				35E5355527BA125600AEBB34 /* ViewModel */,
 				35B5FC7127A1FB4800570514 /* Views */,
 				35B5FC7027A1FB4100570514 /* Controllers */,
 				35B5FC6F27A1FB3A00570514 /* Facade */,
@@ -375,6 +373,22 @@
 			path = Containers;
 			sourceTree = "<group>";
 		};
+		35E5355527BA125600AEBB34 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				35E5355327BA124A00AEBB34 /* LtkViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		35E5355627BC57D700AEBB34 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				35E5355727BC57F500AEBB34 /* Box.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -471,6 +485,7 @@
 				35B5FCB627A2688000570514 /* JSONEncoderExtension.swift in Sources */,
 				35D8F61227A383E500776F1E /* ProductCollectionViewCell.swift in Sources */,
 				35B5FC9B27A2503000570514 /* DecodableExtension.swift in Sources */,
+				35E5355827BC57F500AEBB34 /* Box.swift in Sources */,
 				35B5FC9827A24BAC00570514 /* ParentJson.swift in Sources */,
 				35B5FCAB27A258C300570514 /* LtkProvider.swift in Sources */,
 				35B5FCB327A25E4F00570514 /* JSONDecoderExtension.swift in Sources */,
@@ -491,6 +506,7 @@
 				35B5FC8A27A220E700570514 /* NibLoadableView.swift in Sources */,
 				35B5FC9E27A251F400570514 /* LtkEndpoint.swift in Sources */,
 				35B5FC9227A23C7100570514 /* UIViewControllerExtension.swift in Sources */,
+				35E5355427BA124A00AEBB34 /* LtkViewModel.swift in Sources */,
 				35D8F61827A3865300776F1E /* UICollectionViewExtension.swift in Sources */,
 				35B5FC5627A1FA4500570514 /* SceneDelegate.swift in Sources */,
 				35B5FCB127A25DA100570514 /* NetworkErrors.swift in Sources */,

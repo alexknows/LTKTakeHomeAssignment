@@ -14,6 +14,13 @@ class ProductImageViewCell: UITableViewCell {
     
     // MARK: Image View
     @IBOutlet private weak var productImageView: UIImageView!
+    
+    
+    var ltkViewModel: Ltk! {
+        didSet {
+            productImageView.setImage(with: ltkViewModel.heroImage)
+        }
+    }
 
 }
 
@@ -26,15 +33,6 @@ extension ProductImageViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-}
-
-// ===============
-// MARK: - Methods
-// ===============
-extension ProductImageViewCell {
-    func setDataCell(with image: URL?) {
-        productImageView.setImage(with: image)
     }
 }
 

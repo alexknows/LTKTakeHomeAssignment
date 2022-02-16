@@ -14,8 +14,9 @@ extension SwinjectStoryboard {
   @objc class func setup() {
     defaultContainer.autoregister(LtkServiceProtocol.self, initializer: LtkService.init)
     defaultContainer.autoregister(LtkFacadeProtocol.self, initializer: LtkFacade.init)
+    defaultContainer.autoregister(LtkViewModelProtocol.self, initializer: LtkViewModel.init)
     defaultContainer.storyboardInitCompleted(LtkViewController.self) { resolver, controller in
-      controller.facade = resolver ~> LtkFacadeProtocol.self
+        controller.viewModel = resolver ~> LtkViewModelProtocol.self
     }
   }
 }

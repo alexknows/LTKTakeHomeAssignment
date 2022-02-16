@@ -29,25 +29,8 @@ final class LtkViewController: UIViewController {
     // ==================
     
     // MARK: Injection
-    var facade: LtkFacadeProtocol?
-    
-    // MARK: Private
-    private var currentPage: LtksWrapper? {
-        didSet {
-            if oldValue != nil {
-                guard let currentPage = currentPage else { return }
-                datasource.append(contentsOf: currentPage.ltks)
-            } else {
-                guard let currentPage = currentPage else { return }
-                datasource = currentPage.ltks
-            }
-        }
-    }
-    private var datasource: [Ltk] = [] {
-        didSet {
-            tableView?.reloadData()
-        }
-    }
+    var viewModel: LtkViewModelProtocol?
+
 }
 
 
@@ -64,11 +47,12 @@ extension LtkViewController {
         showLoading()
             .then { [weak self] _ -> Promise<LtksWrapper> in
                 guard let self = self else { return Promise(error: GlobalError.selfIsNil)}
-                return self.getCurrentPage(with: "true", limit: 10)
+                return (self.viewModel?.getCurrentPage(with: "true", limit: 10, lastId: "", seed: ""))!
             }
-            .done(setCurrentPage)
-            .ensure(hideLoading)
+            .done(self.viewModel!.setCurrentPage)
+            .ensure(showView)
             .catch(presentError)
+  
     }
 }
 
@@ -82,6 +66,7 @@ extension LtkViewController {
         case .showProduct:
             let destinationVC = segue.destination as? ProductViewController
             destinationVC?.detailModel =  sender as? DetailModel
+            destinationVC?.ltkViewModel = self.viewModel as? LtkViewModel
         }
     }
 }
@@ -98,19 +83,8 @@ private extension LtkViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    func setCurrentPage(with data: LtksWrapper) {
-        currentPage = data
-    }
-    
-}
-
-// ==========================
-// MARK: - Facade Interaction
-// ==========================
-private extension LtkViewController {
-    func getCurrentPage(with featured: String, limit: Int, lastId: String? = nil, seed: String? = nil) -> Promise<LtksWrapper> {
-        guard let facade = facade else { fatalError("Missing dependencies") }
-        return facade.getCurrentPage(with: featured, limit: limit, lastId: lastId, seed: seed)
+    func reload() {
+        tableView.reloadData()
     }
 }
 
@@ -123,7 +97,8 @@ private extension LtkViewController {
         return .value(())
     }
     
-    func hideLoading() {
+    func showView() {
+        tableView.reloadData()
         tableView.hideLoading()
     }
 }
@@ -135,13 +110,15 @@ private extension LtkViewController {
 // MARK: Data Source
 extension LtkViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        datasource.count
+        return self.viewModel?.dataSource.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ProductImageViewCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.setDataCell(with: datasource[indexPath.row].heroImage)
+        let ltkViewModel = self.viewModel?.dataSource[indexPath.row]
+        cell.ltkViewModel = ltkViewModel
         return cell
+        
     }
 }
 
@@ -152,26 +129,22 @@ extension LtkViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var products: [Product?] = []
-        datasource[indexPath.row].productIds?.forEach { productID in
-            products.append(currentPage?.products.first { $0.id == productID } )
-        }
-        
-        let detailObject = DetailModel(heroImage: datasource[indexPath.row].heroImage,
-                                      avatarUrl: currentPage?.profiles.first { $0.id == datasource[indexPath.row].profileId }?.avatarUrl,
-                                      products: products.compactMap { $0 } )
-        
+        guard let unwrapped_currentPage = self.viewModel?.currentPage else { return }
+        guard let unwrapped_datasource = self.viewModel?.dataSource else { return }
+        let detailObject = self.viewModel?.passingObject(currentPage: unwrapped_currentPage,
+                                                         dataSource: unwrapped_datasource,
+                                                         indexPath: indexPath)
         performSegue(withIdentifier: Segue.showProduct, sender: detailObject)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 >= datasource.count {
-            guard let lastId = currentPage?.meta.lastId,
-                  let seed = currentPage?.meta.seed else { return }
-            
-            getCurrentPage(with: "true", limit: 10, lastId: lastId, seed: seed)
-                .done(setCurrentPage)
-                .ensure(hideLoading)
+        if indexPath.row + 1 >= self.viewModel?.dataSource.count ?? 0 {
+            guard let lastId = self.viewModel?.currentPage?.meta.lastId,
+                  let seed = self.viewModel?.currentPage?.meta.seed else { return }
+
+            self.viewModel?.getCurrentPage(with: "true", limit: 10, lastId: lastId, seed: seed)
+                .done(self.viewModel!.setCurrentPage)
+                .ensure(showView)
                 .catch(presentError)
         }
     }

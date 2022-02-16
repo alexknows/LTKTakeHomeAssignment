@@ -36,6 +36,8 @@ final class ProductViewController: UIViewController {
     // MARK: Public
     var detailModel: DetailModel?
     
+    var ltkViewModel: LtkViewModel!
+    
     // MARK: Private
     private var products: [Product] = [] {
         didSet {
@@ -77,9 +79,17 @@ private extension ProductViewController {
         /**
          
         */
+        ltkViewModel.heroImage.bind { [weak self] heroImage in
+            self?.mainImageView.setImage(with: heroImage)
+        }
+        // mainImageView.setImage(with: detailModel?.heroImage)
+        //
+        ltkViewModel.avatarUrl.bind { [weak self] avatarUrl in
+            self?.profileImageView.setImage(with: avatarUrl)
+        }
+        //
+        // profileImageView.setImage(with: detailModel?.avatarUrl)
         products = detailModel?.products ?? []
-        mainImageView.setImage(with: detailModel?.heroImage)
-        profileImageView.setImage(with: detailModel?.avatarUrl)
     }
 }
 
