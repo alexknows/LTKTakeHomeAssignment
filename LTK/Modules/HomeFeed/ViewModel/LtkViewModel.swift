@@ -13,7 +13,7 @@ protocol LtkViewModelProtocol {
     var currentPage: LtksWrapper? { get }
     func setCurrentPage(with data: LtksWrapper)
     func getCurrentPage(with featured: String, limit: Int, lastId: String?, seed: String?) -> Promise<LtksWrapper>
-    func passingObject(currentPage: LtksWrapper, dataSource: [Ltk], indexPath: IndexPath) -> DetailModel
+    func passingObject(currentPage: LtksWrapper, dataSource: [Ltk], indexPath: IndexPath)
 }
 
 class LtkViewModel: LtkViewModelProtocol {
@@ -23,6 +23,7 @@ class LtkViewModel: LtkViewModelProtocol {
     // ==================
     let avatarUrl: Box<URL?> = Box(nil)
     let heroImage: Box<URL?> = Box(nil)
+    let products: Box<[Product]?> = Box(nil)
     
     // MARK: Injection
     var facade: LtkFacadeProtocol?
@@ -44,6 +45,7 @@ class LtkViewModel: LtkViewModelProtocol {
     }
     //
     public var dataSource: [Ltk] = []
+
     
     
 }
@@ -56,19 +58,19 @@ extension LtkViewModel {
         self.currentPage = data
     }
     
-    func passingObject(currentPage: LtksWrapper, dataSource: [Ltk], indexPath: IndexPath) -> DetailModel {
+    func passingObject(currentPage: LtksWrapper, dataSource: [Ltk], indexPath: IndexPath) {
         var products: [Product?] = []
         dataSource[indexPath.row].productIds?.forEach { productID in
             products.append(currentPage.products.first { $0.id == productID } )
         }
-        // TODO: Review
-        // FIXME: Fix the forced bang
-        self.heroImage.value = dataSource[indexPath.row].heroImage!
-        self.avatarUrl.value = (currentPage.profiles.first { $0.id == dataSource[indexPath.row].profileId }?.avatarUrl!)!
 
-        return DetailModel(heroImage: dataSource[indexPath.row].heroImage,
-                                      avatarUrl: currentPage.profiles.first { $0.id == dataSource[indexPath.row].profileId }?.avatarUrl,
-                                      products: products.compactMap { $0 } )
+        self.heroImage.value = dataSource[indexPath.row].heroImage
+        self.avatarUrl.value = currentPage.profiles.first { $0.id == dataSource[indexPath.row].profileId }?.avatarUrl
+        self.products.value = products.compactMap { $0 }
+
+//        return DetailModel(heroImage: dataSource[indexPath.row].heroImage,
+//                                      avatarUrl: currentPage.profiles.first { $0.id == dataSource[indexPath.row].profileId }?.avatarUrl,
+//                                      products: products.compactMap { $0 } )
     }
     
 }

@@ -131,10 +131,10 @@ extension LtkViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let unwrapped_currentPage = self.viewModel?.currentPage else { return }
         guard let unwrapped_datasource = self.viewModel?.dataSource else { return }
-        let detailObject = self.viewModel?.passingObject(currentPage: unwrapped_currentPage,
+        self.viewModel?.passingObject(currentPage: unwrapped_currentPage,
                                                          dataSource: unwrapped_datasource,
                                                          indexPath: indexPath)
-        performSegue(withIdentifier: Segue.showProduct, sender: detailObject)
+        performSegue(withIdentifier: Segue.showProduct, sender: nil)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

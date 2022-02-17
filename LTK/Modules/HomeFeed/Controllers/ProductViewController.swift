@@ -39,7 +39,7 @@ final class ProductViewController: UIViewController {
     var ltkViewModel: LtkViewModel!
     
     // MARK: Private
-    private var products: [Product] = [] {
+    private var productsArray: [Product] = [] {
         didSet {
             collectionView?.reloadData()
         }
@@ -75,21 +75,19 @@ private extension ProductViewController {
     }
     
     func setupView() {
-        // What are you doing here?
-        /**
-         
-        */
         ltkViewModel.heroImage.bind { [weak self] heroImage in
             self?.mainImageView.setImage(with: heroImage)
         }
-        // mainImageView.setImage(with: detailModel?.heroImage)
         //
         ltkViewModel.avatarUrl.bind { [weak self] avatarUrl in
             self?.profileImageView.setImage(with: avatarUrl)
         }
         //
-        // profileImageView.setImage(with: detailModel?.avatarUrl)
-        products = detailModel?.products ?? []
+        // products = detailModel?.products ?? []
+        //
+        ltkViewModel.products.bind { [weak self] products in
+            self?.productsArray = products ?? []
+        }
     }
 }
 
@@ -100,12 +98,12 @@ private extension ProductViewController {
 // MARK: Data Source
 extension ProductViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return products.count
+        return self.productsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ProductCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.setContent(image: products[indexPath.row].imageUrl)
+        cell.setContent(image: self.productsArray[indexPath.row].imageUrl)
         return cell
     }
 }
@@ -113,7 +111,7 @@ extension ProductViewController: UICollectionViewDataSource {
 // MARK: Delegate
 extension ProductViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let url = detailModel?.products?[indexPath.row].hyperlink  else { return }
+        guard let url = self.productsArray[indexPath.row].hyperlink  else { return }
         let config = SFSafariViewController.Configuration()
         config.entersReaderIfAvailable = true
         
