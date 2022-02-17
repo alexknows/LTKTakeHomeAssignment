@@ -83,8 +83,6 @@ private extension ProductViewController {
             self?.profileImageView.setImage(with: avatarUrl)
         }
         //
-        // products = detailModel?.products ?? []
-        //
         ltkViewModel.products.bind { [weak self] products in
             self?.productsArray = products ?? []
         }
