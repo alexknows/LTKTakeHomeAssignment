@@ -67,10 +67,6 @@ extension LtkViewModel {
         self.heroImage.value = dataSource[indexPath.row].heroImage
         self.avatarUrl.value = currentPage.profiles.first { $0.id == dataSource[indexPath.row].profileId }?.avatarUrl
         self.products.value = products.compactMap { $0 }
-
-//        return DetailModel(heroImage: dataSource[indexPath.row].heroImage,
-//                                      avatarUrl: currentPage.profiles.first { $0.id == dataSource[indexPath.row].profileId }?.avatarUrl,
-//                                      products: products.compactMap { $0 } )
     }
     
 }

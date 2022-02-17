@@ -11,6 +11,4 @@ struct DetailModel {
     let heroImage: URL?
     let avatarUrl: URL?
     let products: [Product]?
-    
-
 }
